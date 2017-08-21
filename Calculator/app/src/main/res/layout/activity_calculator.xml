@@ -74,11 +74,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Extra functions:"/>
+
         <Button
-            android:id="@+id/operation_extra1"
+            android:id="@+id/operation_exp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="func1"/>
+            android:onClick="onClick"
+            android:text="^" />
         <Button
             android:id="@+id/operation_extra2"
             android:layout_width="wrap_content"

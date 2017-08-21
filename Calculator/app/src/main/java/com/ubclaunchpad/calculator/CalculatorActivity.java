@@ -30,41 +30,51 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
      */
     @Override
     public void onClick(View v) {
-        double output = 0.0;
-        double num1 = Double.parseDouble(input1.getText().toString());
-        double num2 = Double.parseDouble(input2.getText().toString());
-        //TODO: fix errors (division by zero and input not set
-        switch (v.getId())
-        {
-            case R.id.operation_add:
-            {
-                output = num1 + num2;
-                break;
+        try {
+            double output = 0.0;
+            double num1 = Double.parseDouble(input1.getText().toString());
+            double num2 = Double.parseDouble(input2.getText().toString());
+            switch (v.getId()) {
+                case R.id.operation_add: {
+                    output = num1 + num2;
+                    break;
+                }
+                case R.id.operation_sub: {
+                    output = num1 - num2;
+                    break;
+                }
+                case R.id.operation_multi: {
+                    output = num1 * num2;
+                    break;
+                }
+                case R.id.operation_div: {
+                    if (num2 == 0) {
+                        throw new ArithmeticException();
+                    }
+                    output = num1 / num2;
+                    break;
+                }
+                case R.id.operation_exp: {
+                    if (num1 == 0 && num2 < 0) {
+                        throw new ArithmeticException();
+                    }
+                    output = Math.pow(num1, num2);
+                    break;
+                }
+                //TODO any extra implementations (optional)
+                default: {
+                    Toast.makeText(this, "Click not implemented yet", Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "View id: " + v.getId() + " click not implemented yet");
+                    break;
+                }
             }
-            case R.id.operation_sub:
-            {
-                output = num1 - num2;
-                break;
-            }
-            case R.id.operation_multi:
-            {
-                output = num1 * num2;
-                break;
-            }
-            case R.id.operation_div:
-            {
-                output = num1 / num2;
-                break;
-            }
-            //TODO any extra implementations (optional)
-            default:
-            {
-                Toast.makeText(this, "Click not implmented yet", Toast.LENGTH_LONG).show();
-                Log.e(TAG, "View id: " + v.getId() + " click not implemented yet");
-                break;
-            }
-        }
 
-        result.setText("Result: " + output);
+            result.setText("Result: " + output);
+
+        } catch (NumberFormatException e) {
+            result.setText("ERROR: inputs not set correctly");
+        } catch (ArithmeticException e) {
+            result.setText("ERROR: division by zero");
+        }
     }
 }
