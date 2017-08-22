@@ -61,7 +61,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                     output = Math.pow(num1, num2);
                     break;
                 }
-                //TODO any extra implementations (optional)
                 default: {
                     Toast.makeText(this, "Click not implemented yet", Toast.LENGTH_LONG).show();
                     Log.e(TAG, "View id: " + v.getId() + " click not implemented yet");
